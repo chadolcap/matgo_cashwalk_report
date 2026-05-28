@@ -1,30 +1,30 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(where python *)",
-      "Bash(Get-ChildItem -Path 'C:\\\\Users$env:USERNAME\\\\AppData\\\\Local\\\\Programs\\\\Python' -ErrorAction SilentlyContinue)",
-      "Bash(Select-Object -ExpandProperty Name)",
-      "Bash(python -m pip --version)",
-      "PowerShell(Test-Path *)",
-      "PowerShell(Get-Content *)",
-      "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import sys; print\\(sys.version\\)\")",
-      "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import win32gui; print\\('win32gui OK'\\)\" 2>&1)",
-      "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"from PIL import ImageGrab; print\\('PIL OK'\\)\" 2>&1)",
-      "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import pyautogui; print\\('pyautogui OK'\\)\" 2>&1)",
-      "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -m pip list 2>&1)",
-      "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\\" /b)",
-      "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\\" /b)",
-      "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\Screen\\\\\" /b)",
-      "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\Session\\\\\" /b)",
-      "PowerShell(Get-Process *)",
-      "PowerShell(cmd /c \"dir `\"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\python38.dll`\"\")",
-      "PowerShell(C:\\\\Python314\\\\python.exe \"D:\\\\claude_work\\\\matgo_server_report\\\\text_to_image.py\" \"D:\\\\claude_work\\\\matgo_server_report\\\\sample_pm2.txt\" \"D:\\\\claude_work\\\\matgo_server_report\\\\file\\\\test_sample.png\")",
-      "PowerShell(C:\\\\Python314\\\\python.exe \"D:\\\\claude_work\\\\matgo_server_report\\\\main.py\")",
-      "PowerShell(C:\\\\Python314\\\\python.exe -m pip install pyautogui pywin32 --quiet)",
-      "PowerShell(C:\\\\Python314\\\\python.exe -c \"import pyautogui, win32gui; print\\('OK'\\)\")",
-      "PowerShell(Get-ChildItem \"D:\\\\claude_work\\\\matgo_server_report\" -Recurse | Where-Object { !$_.PSIsContainer } | Select-Object FullName | Sort-Object FullName)",
-      "PowerShell(C:\\\\Python314\\\\python.exe -c \"import ast, sys; ast.parse\\(open\\(r'D:\\\\claude_work\\\\matgo_server_report\\\\main.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK: 문법 오류 없음'\\)\")",
-      "PowerShell(C:\\\\Python314\\\\python.exe D:\\\\claude_work\\\\matgo_server_report\\\\main.py)"
-    ]
+    "permissions": {
+      "allow": [
+        "Bash(where python *)",
+        "Bash(Get-ChildItem -Path 'C:\\\\Users$env:USERNAME\\\\AppData\\\\Local\\\\Programs\\\\Python' -ErrorAction SilentlyContinue)",
+        "Bash(Select-Object -ExpandProperty Name)",
+        "Bash(python -m pip --version)",
+        "PowerShell(Test-Path *)",
+        "PowerShell(Get-Content *)",
+        "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import sys; print\\(sys.version\\)\")",
+        "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import win32gui; print\\('win32gui OK'\\)\" 2>&1)",
+        "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"from PIL import ImageGrab; print\\('PIL OK'\\)\" 2>&1)",
+        "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -c \"import pyautogui; print\\('pyautogui OK'\\)\" 2>&1)",
+        "PowerShell(& \"C:\\\\Python314\\\\python.exe\" -m pip list 2>&1)",
+        "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\\" /b)",
+        "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\\" /b)",
+        "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\Screen\\\\\" /b)",
+        "PowerShell(cmd /c dir \"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\ScriptSample\\\\Session\\\\\" /b)",
+        "PowerShell(Get-Process *)",
+        "PowerShell(cmd /c \"dir `\"C:\\\\Program Files \\(x86\\)\\\\NetSarang\\\\Xshell 8\\\\python38.dll`\"\")",
+        "PowerShell(C:\\\\Python314\\\\python.exe \"D:\\\\claude_work\\\\matgo_server_report\\\\text_to_image.py\" \"D:\\\\claude_work\\\\matgo_server_report\\\\sample_pm2.txt\" \"D:\\\\claude_work\\\\matgo_server_report\\\\file\\\\test_sample.png\")",
+        "PowerShell(C:\\\\Python314\\\\python.exe \"D:\\\\claude_work\\\\matgo_server_report\\\\main.py\")",
+        "PowerShell(C:\\\\Python314\\\\python.exe -m pip install pyautogui pywin32 --quiet)",
+        "PowerShell(C:\\\\Python314\\\\python.exe -c \"import pyautogui, win32gui; print\\('OK'\\)\")",
+        "PowerShell(Get-ChildItem \"D:\\\\claude_work\\\\matgo_server_report\" -Recurse | Where-Object { !$_.PSIsContainer } | Select-Object FullName | Sort-Object FullName)",
+        "PowerShell(C:\\\\Python314\\\\python.exe -c \"import ast, sys; ast.parse\\(open\\(r'D:\\\\claude_work\\\\matgo_server_report\\\\main.py', encoding='utf-8'\\).read\\(\\)\\); print\\('OK: 문법 오류 없음'\\)\")",
+        "PowerShell(C:\\\\Python314\\\\python.exe D:\\\\claude_work\\\\matgo_server_report\\\\main.py)"
+      ]
+    }
   }
-}
