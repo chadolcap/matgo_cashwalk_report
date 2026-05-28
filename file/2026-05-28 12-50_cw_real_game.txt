@@ -1,0 +1,74 @@
+##HEADER## 2026-05-28 12-50  |  Matgo Game Server Status
+================================================================
+
+[서버 1]  cw_real_game_1  [OK]
+----------------------------------------------------------------
+│ id  │ name               │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 36  │ matgo_game_11_0    │ default     │ N/A     │ fork    │ 12432    │ 2h     │ 0    │ online    │ 0%       │ 100.5mb  │ ec2-user │ disabled │
+│ 37  │ matgo_game_12_1    │ default     │ N/A     │ fork    │ 11146    │ 2h     │ 0    │ online    │ 0%       │ 88.9mb   │ ec2-user │ disabled │
+│ 30  │ matgo_game_2_0     │ default     │ N/A     │ fork    │ 12439    │ 2h     │ 0    │ online    │ 0%       │ 160.1mb  │ ec2-user │ disabled │
+│ 31  │ matgo_game_3_1     │ default     │ N/A     │ fork    │ 11153    │ 2h     │ 0    │ online    │ 0%       │ 110.1mb  │ ec2-user │ disabled │
+│ 32  │ matgo_game_5_0     │ default     │ N/A     │ fork    │ 12446    │ 2h     │ 1    │ online    │ 0%       │ 142.7mb  │ ec2-user │ disabled │
+│ 33  │ matgo_game_6_1     │ default     │ N/A     │ fork    │ 11160    │ 2h     │ 0    │ online    │ 0%       │ 109.5mb  │ ec2-user │ disabled │
+│ 34  │ matgo_game_8_0     │ default     │ N/A     │ fork    │ 12453    │ 2h     │ 0    │ online    │ 0%       │ 135.4mb  │ ec2-user │ disabled │
+│ 35  │ matgo_game_9_1     │ default     │ N/A     │ fork    │ 11167    │ 2h     │ 0    │ online    │ 0%       │ 104.4mb  │ ec2-user │ disabled │
+│ 28  │ matgo_health       │ default     │ N/A     │ fork    │ 12985    │ 3M     │ 0    │ online    │ 0%       │ 64.4mb   │ ec2-user │ disabled │
+│ 27  │ matgo_pincrux      │ default     │ N/A     │ fork    │ 12979    │ 3M     │ 0    │ online    │ 0%       │ 77.6mb   │ ec2-user │ disabled │
+│ 29  │ matgo_robby_2      │ default     │ N/A     │ fork    │ 11174    │ 2h     │ 0    │ online    │ 0%       │ 111.4mb  │ ec2-user │ disabled │
+│ 26  │ matgo_watcher      │ default     │ N/A     │ fork    │ 12973    │ 3M     │ 0    │ online    │ 0%       │ 290.2mb  │ ec2-user │ disabled │
+└─────┴────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬───────────────────────────────────────┬────────────────────┬───────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                                │ version            │ pid   │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼───────────────────────────────────────┼────────────────────┼───────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                         │ 2.7.0              │ 2558  │ online   │ 0    │ 0%       │ 73.9mb   │ ec2-user │
+└────┴───────────────────────────────────────┴────────────────────┴───────┴──────────┴──────┴──────────┴──────────┴──────────┘
+
+[서버 2]  cw_real_game_2  [OK]
+----------------------------------------------------------------
+│ id  │ name               │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 31  │ matgo_game_10_0    │ default     │ N/A     │ fork    │ 5891     │ 2h     │ 0    │ online    │ 0%       │ 107.0mb  │ ec2-user │ disabled │
+│ 32  │ matgo_game_11_1    │ default     │ N/A     │ fork    │ 4580     │ 2h     │ 0    │ online    │ 0%       │ 88.1mb   │ ec2-user │ disabled │
+│ 33  │ matgo_game_13_0    │ default     │ N/A     │ fork    │ 5884     │ 2h     │ 0    │ online    │ 0%       │ 162.5mb  │ ec2-user │ disabled │
+│ 34  │ matgo_game_13_2    │ default     │ N/A     │ fork    │ 4587     │ 2h     │ 0    │ online    │ 0%       │ 87.3mb   │ ec2-user │ disabled │
+│ 25  │ matgo_game_1_0     │ default     │ N/A     │ fork    │ 5898     │ 2h     │ 0    │ online    │ 0%       │ 137.8mb  │ ec2-user │ disabled │
+│ 26  │ matgo_game_2_1     │ default     │ N/A     │ fork    │ 4594     │ 2h     │ 0    │ online    │ 0%       │ 112.5mb  │ ec2-user │ disabled │
+│ 27  │ matgo_game_4_0     │ default     │ N/A     │ fork    │ 5905     │ 2h     │ 0    │ online    │ 0%       │ 153.7mb  │ ec2-user │ disabled │
+│ 28  │ matgo_game_5_1     │ default     │ N/A     │ fork    │ 4601     │ 2h     │ 0    │ online    │ 0%       │ 110.3mb  │ ec2-user │ disabled │
+│ 29  │ matgo_game_7_0     │ default     │ N/A     │ fork    │ 5912     │ 2h     │ 0    │ online    │ 0%       │ 136.8mb  │ ec2-user │ disabled │
+│ 30  │ matgo_game_8_1     │ default     │ N/A     │ fork    │ 4608     │ 2h     │ 0    │ online    │ 0%       │ 98.0mb   │ ec2-user │ disabled │
+│ 24  │ matgo_robby_0      │ default     │ N/A     │ fork    │ 4615     │ 2h     │ 0    │ online    │ 0%       │ 109.0mb  │ ec2-user │ disabled │
+└─────┴────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬───────────────────────────────────────┬────────────────────┬───────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                                │ version            │ pid   │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼───────────────────────────────────────┼────────────────────┼───────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                         │ 2.7.0              │ 1688  │ online   │ 0    │ 0%       │ 71.0mb   │ ec2-user │
+└────┴───────────────────────────────────────┴────────────────────┴───────┴──────────┴──────┴──────────┴──────────┴──────────┘
+
+[서버 3]  cw_real_game_3  [OK]
+----------------------------------------------------------------
+│ id  │ name               │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼────────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 55  │ matgo_game_10_1    │ default     │ N/A     │ fork    │ 26629    │ 2h     │ 0    │ online    │ 0%       │ 95.9mb   │ ec2-user │ disabled │
+│ 56  │ matgo_game_12_0    │ default     │ N/A     │ fork    │ 27931    │ 2h     │ 0    │ online    │ 0%       │ 88.0mb   │ ec2-user │ disabled │
+│ 57  │ matgo_game_13_1    │ default     │ N/A     │ fork    │ 26636    │ 2h     │ 0    │ online    │ 0%       │ 118.1mb  │ ec2-user │ disabled │
+│ 58  │ matgo_game_15_0    │ default     │ N/A     │ fork    │ 27938    │ 2h     │ 0    │ online    │ 0%       │ 86.5mb   │ ec2-user │ disabled │
+│ 49  │ matgo_game_1_1     │ default     │ N/A     │ fork    │ 26643    │ 2h     │ 0    │ online    │ 0%       │ 109.3mb  │ ec2-user │ disabled │
+│ 50  │ matgo_game_3_0     │ default     │ N/A     │ fork    │ 27945    │ 2h     │ 0    │ online    │ 0%       │ 149.9mb  │ ec2-user │ disabled │
+│ 51  │ matgo_game_4_1     │ default     │ N/A     │ fork    │ 26650    │ 2h     │ 0    │ online    │ 0%       │ 113.2mb  │ ec2-user │ disabled │
+│ 52  │ matgo_game_6_0     │ default     │ N/A     │ fork    │ 27952    │ 2h     │ 0    │ online    │ 0%       │ 137.5mb  │ ec2-user │ disabled │
+│ 53  │ matgo_game_7_1     │ default     │ N/A     │ fork    │ 26657    │ 2h     │ 0    │ online    │ 0%       │ 106.8mb  │ ec2-user │ disabled │
+│ 54  │ matgo_game_9_0     │ default     │ N/A     │ fork    │ 27959    │ 2h     │ 1    │ online    │ 0%       │ 103.5mb  │ ec2-user │ disabled │
+│ 48  │ matgo_robby_1      │ default     │ N/A     │ fork    │ 26664    │ 2h     │ 0    │ online    │ 0%       │ 109.6mb  │ ec2-user │ disabled │
+└─────┴────────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+Module
+┌────┬───────────────────────────────────────┬────────────────────┬───────┬──────────┬──────┬──────────┬──────────┬──────────┐
+│ id │ module                                │ version            │ pid   │ status   │ ↺    │ cpu      │ mem      │ user     │
+├────┼───────────────────────────────────────┼────────────────────┼───────┼──────────┼──────┼──────────┼──────────┼──────────┤
+│ 0  │ pm2-logrotate                         │ 2.7.0              │ 22907 │ online   │ 0    │ 0%       │ 74.6mb   │ ec2-user │
+└────┴───────────────────────────────────────┴────────────────────┴───────┴──────────┴──────┴──────────┴──────────┴──────────┘
+
+================================================================
