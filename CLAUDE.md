@@ -82,7 +82,7 @@ password = DB_PASSWORD
 
 ```
 DB_START 2026-05-29 08:05:00
-  [ADMIN_STATISTICS_BUY] 당일 포인트 통계
+  [ADMIN_STATISTICS_BUY] 전일 포인트 통계
   ----------------------------------------------
   reg_date        point_total
   ----------------------------------------------

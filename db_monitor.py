@@ -25,7 +25,7 @@ _QUERY = (
     "SELECT TO_CHAR(reg_date, 'YYYY-MM-DD') AS reg_date, "
     "       point_total "
     "FROM   GAMEN.ADMIN_STATISTICS_BUY "
-    "WHERE  TRUNC(reg_date) = TRUNC(SYSDATE) "
+    "WHERE  TRUNC(reg_date) = TRUNC(SYSDATE) - 1 "
     "ORDER  BY reg_date DESC"
 )
 
@@ -64,7 +64,7 @@ def AppendToLog(rows):
     sep = "-" * 46
     lines = [
         f"DB_START {now}",
-        "  [ADMIN_STATISTICS_BUY] 당일 포인트 통계",
+        "  [ADMIN_STATISTICS_BUY] 전일 포인트 통계",
         f"  {sep}",
         f"  {'reg_date':<12}  {'point_total':>15}",
         f"  {sep}",
