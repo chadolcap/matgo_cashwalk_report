@@ -17,26 +17,86 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 프로젝트 개요
 
-맞고 게임 서버 3대(Amazon Linux)의 PM2 프로세스 상태를 매일 자동으로 수집하는 Windows 자동화 도구.
-Windows 작업 스케줄러 → `run_monitor.bat` → `main.py` → Xshell 8 자동 조작 → `xshell_script.py` → `file/*.txt` 저장 순으로 실행된다.
+두 가지 독립 모니터링 기능으로 구성:
+1. **PM2 상태 수집** — 맞고 게임 서버 3대(Amazon Linux) SSH 접속 후 `pm2 ls` 결과를 `file/*.txt`에 저장
+2. **DB 통계 수집** — Oracle DB `ADMIN_STATISTICS_BUY` 테이블에서 당일 포인트 통계를 `log.txt`에 기록
 
 ## 실행 방법
 
 ```powershell
-# 수동 실행 (로그인 상태, Xshell이 설치된 환경 필요)
+# [PM2] 수동 실행 (로그인 상태, Xshell이 설치된 환경 필요)
 C:\Python314\python.exe main.py
+
+# [DB] 수동 실행 (_db_cred.ini 설정 후)
+C:\Python314\python.exe db_monitor.py
 
 # 실행 결과 로그 확인 (작업 스케줄러 자동 실행 후)
 Get-Content D:\claude_work\matgo_server_report\log.txt -Tail 30
 
-# 스케줄러 즉시 테스트 실행
+# PM2 스케줄러 즉시 테스트 실행
 Start-ScheduledTask -TaskName "Matgo-Server-Check"
 ```
 
 의존 패키지 설치:
 ```powershell
 C:\Python314\python.exe -m pip install pywin32 pyautogui
+C:\Python314\python.exe -m pip install oracledb
 ```
+
+---
+
+## DB 모니터링 (db_monitor.py)
+
+### 설정: _db_cred.ini
+
+`_db_cred.ini`는 DB 접속 정보를 보관하는 파일로 **git에 포함되지 않는다** (`.gitignore`에 등록).  
+최초 1회 설정이 필요하다:
+
+```powershell
+# 템플릿 복사
+Copy-Item _db_cred.ini.template _db_cred.ini
+# 이후 메모장 등으로 _db_cred.ini 를 열어 실제 접속 정보 입력
+notepad _db_cred.ini
+```
+
+`_db_cred.ini` 형식:
+```ini
+[cashwalk_dev]
+host     = DB_HOST
+port     = 1521
+sid      = DB_SID
+user     = DB_USER
+password = DB_PASSWORD
+```
+
+> 접속 정보는 SQL Developer → CASHWALK_DEV 세션 속성에서 확인한다.  
+> 비밀번호는 SQL Developer에 저장된 값을 사용한다.
+
+### DB 보안 규칙
+
+- **SELECT 전용** — `_QUERY` 상수에 SELECT 문만 포함; DML(INSERT/UPDATE/DELETE) 절대 금지
+- **접속 정보 코드 직접 기재 금지** — 모든 접속 정보는 `_db_cred.ini`에서만 읽음
+- `_db_cred.ini`는 git 커밋 금지, 공유 금지
+
+### log.txt DB 출력 형식
+
+```
+DB_START 2026-05-29 08:05:00
+  [ADMIN_STATISTICS_BUY] 당일 포인트 통계
+  ----------------------------------------------
+  reg_date        point_total
+  ----------------------------------------------
+  2026-05-29       12,345,678
+  ----------------------------------------------
+DB_END
+```
+
+오류 발생 시:
+```
+DB_ERROR 2026-05-29 08:05:00: <오류 내용>
+```
+
+---
 
 ## 핵심 아키텍처
 

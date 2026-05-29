@@ -1,0 +1,16 @@
+# _db_cred.ini.template
+# ─────────────────────────────────────────────────────────
+# 이 파일을 복사하여 _db_cred.ini 로 저장하고 실제 값을 입력하세요.
+# _db_cred.ini 는 .gitignore 에 포함되어 git에 커밋되지 않습니다.
+#
+# !! 보안 주의 !!
+#   - 비밀번호가 입력된 _db_cred.ini 를 타인에게 전달하지 마세요
+#   - 원격 저장소에 업로드하지 마세요
+# ─────────────────────────────────────────────────────────
+
+[cashwalk_dev]
+host     = DB_HOST
+port     = 1521
+sid      = DB_SID
+user     = DB_USER
+password = DB_PASSWORD
