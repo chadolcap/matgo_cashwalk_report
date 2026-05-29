@@ -2,6 +2,11 @@
 # Xshell built-in Python automation script for matgo server monitoring.
 # Usage: Xshell > Tools > Script > Run Script > select this file
 #
+# !! 보안 주의 사항 !!
+#   - 서버 보안에 절대 주의
+#   - 서버 접속 후 관련 없는 작업 절대 불가 (pm2 ls 수집만 허용)
+#   - 서비스에 지장을 주는 행위 엄금 (재시작/중지/설정 변경 금지)
+#
 # Constraints of Xshell built-in Python:
 #   - ctypes      : NOT available (_ctypes module missing)
 #   - subprocess  : NOT available (hangs/timeout)
@@ -155,8 +160,8 @@ def ProcessSession(session_info):
         xsh.Session.Open(tmp_path)
         xsh.Screen.Synchronous = True
 
-        # 2. SSH 접속 + Amazon Linux 로그인 배너 완료 대기
-        xsh.Session.Sleep(6000)
+        # 2. SSH 접속 + Amazon Linux 로그인 배너 완료 대기 (10초)
+        xsh.Session.Sleep(10000)
 
         # 3. clear: 이전 내용 제거 → pm2 ls 출력만 남기기 위함
         xsh.Screen.Send("clear")
@@ -243,3 +248,4 @@ def Main():
         f.write("\n".join(done_lines))
 
     # MsgBox 없이 종료 → main.py가 _done.txt 감지 후 자동 진행
+    # Xshell이 Main()을 자동 호출하므로 명시적 호출 불필요

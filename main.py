@@ -392,6 +392,12 @@ def Main() -> None:
     print("=" * 60)
     print("  Matgo Server Monitor")
     print("=" * 60)
+    print()
+    print("  !! 보안 주의 사항 !!")
+    print("  - 서버 보안에 절대 주의")
+    print("  - 서버 접속 후 관련 없는 작업 절대 불가")
+    print("  - 서비스에 지장을 주는 행위 엄금")
+    print("=" * 60)
 
     print("\n[Screen]")
     WakeScreen()
