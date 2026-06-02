@@ -42,7 +42,9 @@
       "Bash(C:\\\\Python314\\\\python.exe db_monitor.py)",
       "Bash(git -C \"D:\\\\claude_work\\\\matgo_server_report\" status)",
       "Bash(git -C \"D:\\\\claude_work\\\\matgo_server_report\" diff)",
-      "Bash(git *)"
+      "Bash(git *)",
+      "Bash(echo \"---EXITCODE:$?\")",
+      "PowerShell(git *)"
     ]
   }
 }

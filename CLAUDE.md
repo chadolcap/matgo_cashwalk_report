@@ -102,7 +102,7 @@ user     = DB_USER
 password = DB_PASSWORD
 ```
 
-> 접속 정보는 SQL Developer → CASHWALK_DEV 세션 속성에서 확인한다.  
+> 접속 정보는 SQL Developer → CASHWALK_REAL 세션 속성에서 확인한다.  
 > 비밀번호는 SQL Developer에 저장된 값을 사용한다.
 
 ### 동작 방식

@@ -1,5 +1,0 @@
-3/3
-saved: D:\claude_work\matgo_server_report\file\2026-05-28 12-50_cw_real_game.txt
-OK cw_real_game_1: OK
-OK cw_real_game_2: OK
-OK cw_real_game_3: OK
