@@ -9,21 +9,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 > **이 도구는 운영 중인 맞고 게임 서버에 SSH 접속 및 Oracle DB에 연결합니다.**
 >
 > ### SSH 서버
+>
 > - **서버 보안에 절대 주의** — 접속 정보 및 세션 파일 외부 유출 금지
 > - **관련 없는 작업 절대 불가** — `pm2 ls` 상태 수집 외 어떠한 명령도 실행하지 말 것
 > - **서비스 중단 엄금** — pm2 재시작·중지·설정 변경·파일 수정 등 일체 금지
 > - **코드 수정 시 반드시 검토** — `xshell_script.py`에서 서버로 전송하는 명령이 `pm2 ls`인지 확인 후 실행할 것
 >
 > ### Oracle DB
+>
 > - **SELECT 전용** — DML(INSERT/UPDATE/DELETE) 절대 금지
 > - **접속 정보 코드 직접 기재 금지** — 모든 접속 정보는 `_db_cred.ini`에서만 읽음
-> - **`_db_cred.ini` git 커밋·공유 금지** — `.gitignore`에 등록되어 있음
+> - `**_db_cred.ini` git 커밋·공유 금지** — `.gitignore`에 등록되어 있음
 
 ---
 
 ## 프로젝트 개요
 
 두 가지 독립 모니터링 기능으로 구성:
+
 1. **PM2 상태 수집** — 맞고 게임 서버 3대(Amazon Linux) SSH 접속 후 `pm2 ls` 결과를 `file/*.txt`에 저장
 2. **DB 통계 수집** — Oracle DB `ADMIN_STATISTICS_BUY` 테이블에서 전일 포인트 통계를 조회하여 당일 `file/*.txt` 파일 끝에 추가
 
@@ -33,17 +36,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 파일 구성
 
-| 파일 | 실행 환경 | 역할 |
-|------|-----------|------|
-| `main.py` | Python 3.14 | Xshell GUI 자동화 오케스트레이터 |
-| `xshell_script.py` | Xshell 내장 Python | SSH 접속 + `pm2 ls` 터미널 읽기 |
-| `db_monitor.py` | Python 3.14 | Oracle DB 쿼리 → `file/*.txt` 추가 기록 |
-| `config.py` | — | PM2 모니터링 설정값 관리 |
-| `run_monitor.bat` | cmd.exe | PM2 모니터링 스케줄러 배치 |
-| `db_run_monitor.bat` | cmd.exe | DB 모니터링 스케줄러 배치 |
-| `_db_cred.ini` | — | DB 접속 정보 (git 제외, 최초 1회 생성) |
-| `_db_cred.ini.template` | — | DB 접속 정보 템플릿 |
-| `.gitignore` | — | `_db_cred.ini` 등 커밋 제외 목록 |
+
+| 파일                      | 실행 환경            | 역할                                |
+| ----------------------- | ---------------- | --------------------------------- |
+| `main.py`               | Python 3.14      | Xshell GUI 자동화 오케스트레이터            |
+| `xshell_script.py`      | Xshell 내장 Python | SSH 접속 + `pm2 ls` 터미널 읽기          |
+| `db_monitor.py`         | Python 3.14      | Oracle DB 쿼리 → `file/*.txt` 추가 기록 |
+| `config.py`             | —                | PM2 모니터링 설정값 관리                   |
+| `run_monitor.bat`       | cmd.exe          | PM2 모니터링 스케줄러 배치                  |
+| `db_run_monitor.bat`    | cmd.exe          | DB 모니터링 스케줄러 배치                   |
+| `_db_cred.ini`          | —                | DB 접속 정보 (git 제외, 최초 1회 생성)       |
+| `_db_cred.ini.template` | —                | DB 접속 정보 템플릿                      |
+| `.gitignore`            | —                | `_db_cred.ini` 등 커밋 제외 목록         |
+
 
 ---
 
@@ -64,6 +69,7 @@ Start-ScheduledTask -TaskName "Matgo-Server-Check"
 ```
 
 의존 패키지 설치:
+
 ```powershell
 C:\Python314\python.exe -m pip install pywin32 pyautogui
 C:\Python314\python.exe -m pip install oracledb
@@ -86,8 +92,9 @@ notepad _db_cred.ini
 ```
 
 `_db_cred.ini` 형식:
+
 ```ini
-[cashwalk_dev]
+[cashwalk_real]
 host     = DB_HOST
 port     = 1521
 sid      = DB_SID
@@ -122,6 +129,7 @@ password = DB_PASSWORD
 ```
 
 오류 발생 시 `log.txt`에 기록:
+
 ```
 DB_ERROR 2026-05-29 08:05:00: <오류 내용>
 ```
@@ -192,27 +200,31 @@ db_monitor.py
 - `Screen.Timeout` **속성 없음**
 - `os.environ["USERPROFILE"]` **불가** — `winreg`으로 읽어야 함 (한글 사용자명 환경)
 - 대기는 모두 `xsh.Session.Sleep(ms)` 고정값으로 처리
-- **`Main()` 자동 호출**: Xshell이 스크립트 실행 시 `Main()` 함수를 자동으로 호출한다.  
-  파일 끝에 `Main()`을 명시적으로 추가하면 **이중 실행**되어 오류 발생 — 절대 추가하지 말 것.
+- `**Main()` 자동 호출**: Xshell이 스크립트 실행 시 `Main()` 함수를 자동으로 호출한다.  
+파일 끝에 `Main()`을 명시적으로 추가하면 **이중 실행**되어 오류 발생 — 절대 추가하지 말 것.
 
 ---
 
 ## Win32 API 주요 사항
 
 ### Xshell 창 구조
+
 - `Xshell8::MainFrame` (또는 `_0`, `_1` 등): 가시 창, `WM_COMMAND` 수신
 - `Xshell8::FrameMgr`: **비가시 창**, Win32 메뉴 핸들 보유 (명령 ID 조회 대상)
 
 Xshell이 재실행되면 클래스명이 `MainFrame_1`처럼 변하므로 반드시 `startswith('Xshell8::MainFrame')`으로 매칭한다.
 
 ### 스크립트 실행 명령 ID
+
 `_SCRIPT_RUN_CMD_ID = 509` — Xshell 8 (Build 0095) "도구 > 스크립트 > 스크립트 실행" 메뉴 항목의 Win32 명령 ID. Xshell 버전 업그레이드 시 변경될 수 있다. 변경된 경우 `_FindMenuCommandId()`가 자동으로 탐색하여 새 ID를 찾는다.
 
 ### Python 3.14 + pywin32 제한
+
 `win32gui.GetMenuString`, `win32gui.GetMenuItemID`, `win32gui.GetSubMenu`가 Python 3.14용 pywin32에 미포함.  
 → `ctypes.windll.user32`로 직접 호출하여 우회 (`_GetMenuString`, `_GetMenuItemID_ct`, `_GetSubMenu`).
 
 ### 파일 다이얼로그 입력 방식
+
 `_FillFileDialog()`는 Edit 컨트롤 감지 실패 시 **클립보드 붙여넣기 + Enter** 방식으로 fallback한다.  
 Xshell 8의 "열기" 다이얼로그에서 Edit 컨트롤이 감지되지 않는 것이 정상 동작이다.
 
@@ -222,12 +234,14 @@ Xshell 8의 "열기" 다이얼로그에서 Edit 컨트롤이 감지되지 않는
 
 모든 경로/타임아웃은 `config.py`에서 관리한다. `xshell_script.py`는 Xshell 내장 Python 제약으로 `config.py`를 import할 수 없어 설정값이 인라인으로 중복 존재한다. 경로 변경 시 두 파일을 모두 수정해야 한다.
 
-| 설정 | `config.py` | `xshell_script.py` |
-|------|-------------|---------------------|
-| 출력 폴더 | `OUTPUT_DIR` | `_OUTPUT_DIR` |
-| 타임스탬프 형식 | `TIMESTAMP_FORMAT` | `_TIMESTAMP_FORMAT` |
-| 세션 경로 | `SESSIONS` | `_SESSIONS` |
+
+| 설정        | `config.py`              | `xshell_script.py`              |
+| --------- | ------------------------ | ------------------------------- |
+| 출력 폴더     | `OUTPUT_DIR`             | `_OUTPUT_DIR`                   |
+| 타임스탬프 형식  | `TIMESTAMP_FORMAT`       | `_TIMESTAMP_FORMAT`             |
+| 세션 경로     | `SESSIONS`               | `_SESSIONS`                     |
 | SSH 대기 시간 | `SSH_CONNECT_TIMEOUT_MS` | `xsh.Session.Sleep(10000)` 하드코딩 |
+
 
 ---
 
@@ -237,27 +251,31 @@ Xshell 8의 "열기" 다이얼로그에서 Edit 컨트롤이 감지되지 않는
 
 반드시 아래 옵션으로 등록해야 GUI 자동화가 작동한다:
 
-| 옵션 | 올바른 설정 | 이유 |
-|------|-------------|------|
-| 실행 조건 | **사용자가 로그온한 경우에만 실행** | 사용자 세션에서 실행되어야 Win32 창 조작 가능 |
-| 최고 권한으로 실행 | 체크 불필요 | 일반 사용자 권한으로 충분 |
-| 화면 보호기 잠금 | **비밀번호 없음** | `WakeScreen()`이 마우스 신호로 자동 해제 |
-| 프로그램/스크립트 | `cmd.exe` | |
-| 인수 추가 | `/c "D:\claude_work\matgo_server_report\run_monitor.bat"` | |
-| 시작 위치 | `D:\claude_work\matgo_server_report` | |
-| 트리거 | 매일 08:00 | |
+
+| 옵션         | 올바른 설정                                                    | 이유                            |
+| ---------- | --------------------------------------------------------- | ----------------------------- |
+| 실행 조건      | **사용자가 로그온한 경우에만 실행**                                     | 사용자 세션에서 실행되어야 Win32 창 조작 가능  |
+| 최고 권한으로 실행 | 체크 불필요                                                    | 일반 사용자 권한으로 충분                |
+| 화면 보호기 잠금  | **비밀번호 없음**                                               | `WakeScreen()`이 마우스 신호로 자동 해제 |
+| 프로그램/스크립트  | `cmd.exe`                                                 |                               |
+| 인수 추가      | `/c "D:\claude_work\matgo_server_report\run_monitor.bat"` |                               |
+| 시작 위치      | `D:\claude_work\matgo_server_report`                      |                               |
+| 트리거        | 매일 08:00                                                  |                               |
+
 
 ### Matgo-DB-Check (DB 모니터링)
 
 PM2 모니터링과 **별도 태스크**로 등록한다. PM2 수집 완료(약 60~90초) 후 실행되도록 트리거 시각을 조정한다:
 
-| 옵션 | 올바른 설정 |
-|------|-------------|
-| 실행 조건 | 사용자가 로그온한 경우에만 실행 (또는 로그온 여부 무관 가능) |
-| 프로그램/스크립트 | `cmd.exe` |
-| 인수 추가 | `/c "D:\claude_work\matgo_server_report\db_run_monitor.bat"` |
-| 시작 위치 | `D:\claude_work\matgo_server_report` |
-| 트리거 | 매일 08:05 (PM2 태스크보다 5분 뒤) |
+
+| 옵션        | 올바른 설정                                                       |
+| --------- | ------------------------------------------------------------ |
+| 실행 조건     | 사용자가 로그온한 경우에만 실행 (또는 로그온 여부 무관 가능)                          |
+| 프로그램/스크립트 | `cmd.exe`                                                    |
+| 인수 추가     | `/c "D:\claude_work\matgo_server_report\db_run_monitor.bat"` |
+| 시작 위치     | `D:\claude_work\matgo_server_report`                         |
+| 트리거       | 매일 08:05 (PM2 태스크보다 5분 뒤)                                    |
+
 
 ### run_monitor.bat / db_run_monitor.bat 편집 주의사항
 
@@ -265,6 +283,7 @@ PM2 모니터링과 **별도 태스크**로 등록한다. PM2 수집 완료(약 
 Claude Code의 Write 도구로 저장하면 LF 줄 끝이 되어 cmd가 줄을 제대로 파싱하지 못한다.
 
 파일 수정 시 PowerShell로 저장:
+
 ```powershell
 # run_monitor.bat
 $c = "@echo off`r`ncd /d `"D:\claude_work\matgo_server_report`"`r`necho START >> log.txt`r`nC:\Python314\python.exe `"D:\claude_work\matgo_server_report\main.py`" >> log.txt 2>&1`r`necho END >> log.txt`r`n"
@@ -317,6 +336,7 @@ taskkill /f /im python.exe
 
 > **주의**: `taskkill /f /im python.exe`는 실행 중인 모든 Python 프로세스를 종료한다.  
 > 다른 Python 작업이 실행 중이라면 PID를 확인 후 선택 종료한다:
+>
 > ```powershell
 > Get-Process python | Select-Object Id, StartTime, MainWindowTitle
 > taskkill /f /pid <PID>

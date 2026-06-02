@@ -50,7 +50,7 @@ def LoadCredentials():
         )
     cfg = configparser.ConfigParser()
     cfg.read(_CRED_FILE, encoding="utf-8")
-    sec = "cashwalk_dev"
+    sec = "cashwalk_real"
     if sec not in cfg:
         sys.exit(f"[ERROR] _db_cred.ini 에 [{sec}] 섹션이 없습니다.")
     return dict(cfg[sec])

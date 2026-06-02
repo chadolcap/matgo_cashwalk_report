@@ -32,7 +32,17 @@
       "PowerShell(tasklist *)",
       "PowerShell(Get-ScheduledTaskInfo *)",
       "PowerShell(Get-ChildItem \"D:\\\\claude_work\\\\matgo_server_report\" -Recurse | Where-Object { -not $_.PSIsContainer } | Select-Object FullName, LastWriteTime | Sort-Object LastWriteTime -Descending)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(Get-ChildItem \"C:\\\\Users\\\\휴먼웍스\\\\AppData\\\\Roaming\\\\SQL Developer\" -Recurse -Filter \"connections.xml\" -ErrorAction SilentlyContinue)",
+      "Bash(Select-Object FullName)",
+      "PowerShell(C:\\\\Python314\\\\python.exe -c \"import oracledb; print\\('oracledb:', oracledb.__version__\\)\" 2>&1)",
+      "PowerShell(C:\\\\Python314\\\\python.exe -m pip install oracledb)",
+      "Bash(C:\\\\Python314\\\\python.exe db_monitor.py)",
+      "Bash(git -C \"D:\\\\claude_work\\\\matgo_server_report\" status)",
+      "Bash(git -C \"D:\\\\claude_work\\\\matgo_server_report\" diff)",
+      "Bash(git *)"
     ]
   }
 }
