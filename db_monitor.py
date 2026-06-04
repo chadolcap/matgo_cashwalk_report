@@ -16,18 +16,19 @@ import configparser
 import glob
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 _BASE_DIR  = r"D:\claude_work\matgo_server_report"
 _CRED_FILE = os.path.join(_BASE_DIR, "_db_cred.ini")
 _LOG_FILE  = os.path.join(_BASE_DIR, "log.txt")   # 오류 기록용 fallback
 
 # READ ONLY — 수정/삭제/추가 쿼리 절대 금지
+# SYSDATE 대신 Python KST 기준 전일 날짜를 바인드 변수로 전달 (DB 서버 UTC 시간대 문제 방지)
 _QUERY = (
     "SELECT TO_CHAR(reg_date, 'YYYY-MM-DD') AS reg_date, "
     "       point_total "
     "FROM   GAMEN.ADMIN_STATISTICS_BUY "
-    "WHERE  TRUNC(reg_date) = TRUNC(SYSDATE) - 1 "
+    "WHERE  TRUNC(reg_date) = TO_DATE(:yesterday, 'YYYY-MM-DD') "
     "ORDER  BY reg_date DESC"
 )
 
@@ -65,9 +66,10 @@ def QueryStats(cred):
         f"(HOST={cred['host']})(PORT={cred['port']}))"
         f"(CONNECT_DATA=(SID={cred['sid']})))"
     )
+    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
     with oracledb.connect(user=cred["user"], password=cred["password"], dsn=dsn) as conn:
         with conn.cursor() as cur:
-            cur.execute(_QUERY)
+            cur.execute(_QUERY, {"yesterday": yesterday})
             return cur.fetchall()
 
 
